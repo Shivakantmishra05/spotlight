@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details - Spotlight</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-spotlight"></i>
+                <span>Spotlight</span>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="events.html">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Event Listing</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="my-events.html">
+                        <i class="fas fa-bookmark"></i>
+                        <span>My Events</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button class="btn-back" onclick="history.back()">
+                        <i class="fas fa-arrow-left"></i>
+                        Back
+                    </button>
+                    <h1>Event Details</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <span id="userName">Welcome, User!</span>
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Event Detail Content -->
+            <div class="dashboard-content">
+                <div class="event-detail-container" id="eventDetailContainer">
+                    <!-- Dynamic event details -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            loadEventDetail();
+        });
+    </script>
+</body>
+</html>

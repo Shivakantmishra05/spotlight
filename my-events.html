@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Events - Spotlight</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-spotlight"></i>
+                <span>Spotlight</span>
+            </div>
+            
+            <ul class="sidebar-menu" id="sidebarMenu">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="events.html">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Event Listing</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="my-events.html">
+                        <i class="fas fa-bookmark"></i>
+                        <span>My Events</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>My Events</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <span id="userName">Welcome, User!</span>
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="dropdown">
+                            <button class="dropdown-btn">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="profile.html">Profile</a>
+                                <a href="notifications.html">Notifications</a>
+                                <a href="#" onclick="logout()">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- My Events Content -->
+            <div class="dashboard-content">
+                <!-- Registered Events -->
+                <div class="events-section">
+                    <h3>Registered Events</h3>
+                    <div class="events-grid" id="registeredEventsGrid">
+                        <!-- Dynamic registered events -->
+                    </div>
+                </div>
+                
+                <!-- Past Events -->
+                <div class="events-section">
+                    <h3>Past Events</h3>
+                    <div class="events-grid" id="pastEventsGrid">
+                        <!-- Dynamic past events -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            loadMyEvents();
+        });
+        
+        function loadMyEvents() {
+            const registeredEvents = JSON.parse(localStorage.getItem(`registeredEvents_${currentUser.id}`) || '[]');
+            const allEvents = JSON.parse(localStorage.getItem('events') || '[]');
+            
+            const myEvents = allEvents.filter(event => registeredEvents.includes(event.id));
+            const currentDate = new Date();
+            
+            const upcomingEvents = myEvents.filter(event => new Date(event.date) >= currentDate);
+            const pastEvents = myEvents.filter(event => new Date(event.date) < currentDate);
+            
+            displayMyEvents('registeredEventsGrid', upcomingEvents);
+            displayMyEvents('pastEventsGrid', pastEvents);
+        }
+        
+        function displayMyEvents(containerId, events) {
+            const container = document.getElementById(containerId);
+            
+            if (events.length === 0) {
+                container.innerHTML = '<p class="text-center">No events found.</p>';
+                return;
+            }
+            
+            container.innerHTML = events.map(event => createEventCard(event)).join('');
+        }
+    </script>
+</body>
+</html>

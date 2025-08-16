@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Spotlight</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-spotlight"></i>
+                <span>Spotlight</span>
+            </div>
+            
+            <ul class="sidebar-menu" id="sidebarMenu">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="events.html">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Event Listing</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="my-events.html">
+                        <i class="fas fa-bookmark"></i>
+                        <span>My Events</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Event Listing</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <span id="userName">Welcome, User!</span>
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="dropdown">
+                            <button class="dropdown-btn">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="profile.html">Profile</a>
+                                <a href="notifications.html">Notifications</a>
+                                <a href="#" onclick="logout()">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Events Content -->
+            <div class="dashboard-content">
+                <!-- Filters -->
+                <div class="filters-section">
+                    <div class="filter-group">
+                        <label for="categoryFilter">Category:</label>
+                        <select id="categoryFilter">
+                            <option value="">All Categories</option>
+                            <option value="technology">Technology</option>
+                            <option value="culture">Culture</option>
+                            <option value="sports">Sports</option>
+                            <option value="academics">Academics</option>
+                            <option value="entrepreneurship">Entrepreneurship</option>
+                        </select>
+                    </div>
+                    
+                    <div class="search-group">
+                        <input type="text" id="searchInput" placeholder="Search events...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                
+                <!-- Events Grid -->
+                <div class="events-grid" id="eventsGrid">
+                    <!-- Dynamic event cards -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            loadEvents();
+            
+            // Filter and search functionality
+            document.getElementById('categoryFilter').addEventListener('change', filterEvents);
+            document.getElementById('searchInput').addEventListener('input', filterEvents);
+        });
+        
+        function toggleMobileMenu() {
+            // Mobile menu toggle logic here
+        }
+    </script>
+</body>
+</html>

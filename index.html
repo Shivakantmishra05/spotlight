@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotlight - Event Management Portal</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo-section">
+                <i class="fas fa-spotlight"></i>
+                <h1>Spotlight</h1>
+                <p>Event Management Portal</p>
+            </div>
+            
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="btn-primary">Login</button>
+                
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="register.html">Sign up</a></p>
+                </div>
+            </form>
+            
+            <div class="demo-accounts">
+                <h4>Demo Accounts:</h4>
+                <div class="demo-buttons">
+                    <button class="demo-btn" data-role="student">Student Demo</button>
+                    <button class="demo-btn" data-role="faculty">Faculty Demo</button>
+                    <button class="demo-btn" data-role="admin">Admin Demo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is already logged in
+            if (localStorage.getItem('currentUser')) {
+                window.location.href = 'dashboard.html';
+            }
+            
+            // Handle login form
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            
+            // Handle demo buttons
+            document.querySelectorAll('.demo-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const role = this.dataset.role;
+                    loginAsDemo(role);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
